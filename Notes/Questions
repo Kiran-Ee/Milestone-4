@@ -1,5 +1,6 @@
 ####################################################################################################
 ---:QUESTIONS:---
-1]- *not sure how to get the label from hex for the data sec
-2]
+1] *not sure how to get the label from hex for the data sec*
+    - Make the "keys" the addresses instead of keys="labels"
+2] do branches have to actually branch?
 ####################################################################################################

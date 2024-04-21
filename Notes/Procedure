@@ -44,7 +44,8 @@
     - Need a class to keep track of the CPU's registers so all instructions can access/mutate state.
         - Probably keep a hashmap so operations can interact with CPU: keys = registers, values = the value each reg is holding.
 [2b] Syscalls
-    -
+    - Whenever encounter Syscalls: print string or int or read int. to the system
+[3] Finish when li $v0 10 or end of program.
 
 
 
