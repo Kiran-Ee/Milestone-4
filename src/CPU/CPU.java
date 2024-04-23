@@ -37,8 +37,8 @@ public class CPU {
     public static int fp = -1;
     public static int ra = -1;
 
-    public CPU() {
-
+    public static String cpu(String hex_dta, String hex_txt) {
+        return null;
     }
 
     public static HashMap<String, Integer> get_registers_state() {
@@ -178,5 +178,13 @@ public class CPU {
                 ra = val;
                 break;
         }
+    }
+
+    public static String syscall_handler(int v0_val){
+        return null;
+    }
+
+    public static String run_program(String[] txtSec_translated){
+        return null;
     }
 }

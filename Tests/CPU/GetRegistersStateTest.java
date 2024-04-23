@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CPUTest {
+class GetRegistersStateTest {
     HashMap<String, Integer> hm = null; //defined in @BeforeEach
 
     // Define string variables for each register key

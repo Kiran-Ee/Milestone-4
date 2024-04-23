@@ -17,7 +17,7 @@ public class Add implements Operation {
     }
 
     @Override
-    public void operate() {
+    public String operate() {
         HashMap<String, Integer> hm = CPU.get_registers_state();
 
         int rs_val = hm.get(rs);
@@ -26,5 +26,6 @@ public class Add implements Operation {
         int sum = rs_val + rt_val;
 
         CPU.update_register(rd, sum);
+        return "";
     }
 }
