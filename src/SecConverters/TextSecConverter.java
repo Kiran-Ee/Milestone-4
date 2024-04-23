@@ -1,8 +1,15 @@
 package SecConverters;
 
-public class TextSecConverter {
-    public void textSec_Converter(String hex_txt) {
+import Operations.Add;
 
+import java.util.LinkedHashMap;
+
+public class TextSecConverter {
+    public static LinkedHashMap<String, Object[]> text_mem = new LinkedHashMap<>();
+
+    public void textSec_Converter(String hex_txt) {
+        // TODO - JUST TESTING THE "val" OBJECT ARRAY
+        text_mem.put("1", new Object[]{"add $1, $1, $1", new Add("$a0", "a1", "a2"), "00400000"});
     }
 
 

@@ -1,6 +1,13 @@
 package CPU;
 
+import Operations.Operation;
+import SecConverters.DataSecConverter;
+import SecConverters.TextSecConverter;
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Scanner;
 
 // will keep track of ALL registers & maybe mem
 public class CPU {
@@ -81,110 +88,143 @@ public class CPU {
 
     public static void update_register(String reg, int val) {
         switch (reg) {
-            case "zero":
+            case "$zero":
                 zero = val;
                 break;
-            case "at":
+            case "$at":
                 at = val;
                 break;
-            case "v0":
+            case "$v0":
                 v0 = val;
                 break;
-            case "v1":
+            case "$v1":
                 v1 = val;
                 break;
-            case "a0":
+            case "$a0":
                 a0 = val;
                 break;
-            case "a1":
+            case "$a1":
                 a1 = val;
                 break;
-            case "a2":
+            case "$a2":
                 a2 = val;
                 break;
-            case "a3":
+            case "$a3":
                 a3 = val;
                 break;
-            case "t0":
+            case "$t0":
                 t0 = val;
                 break;
-            case "t1":
+            case "$t1":
                 t1 = val;
                 break;
-            case "t2":
+            case "$t2":
                 t2 = val;
                 break;
-            case "t3":
+            case "$t3":
                 t3 = val;
                 break;
-            case "t4":
+            case "$t4":
                 t4 = val;
                 break;
-            case "t5":
+            case "$t5":
                 t5 = val;
                 break;
-            case "t6":
+            case "$t6":
                 t6 = val;
                 break;
-            case "t7":
+            case "$t7":
                 t7 = val;
                 break;
-            case "s0":
+            case "$s0":
                 s0 = val;
                 break;
-            case "s1":
+            case "$s1":
                 s1 = val;
                 break;
-            case "s2":
+            case "$s2":
                 s2 = val;
                 break;
-            case "s3":
+            case "$s3":
                 s3 = val;
                 break;
-            case "s4":
+            case "$s4":
                 s4 = val;
                 break;
-            case "s5":
+            case "$s5":
                 s5 = val;
                 break;
-            case "s6":
+            case "$s6":
                 s6 = val;
                 break;
-            case "s7":
+            case "$s7":
                 s7 = val;
                 break;
-            case "t8":
+            case "$t8":
                 t8 = val;
                 break;
-            case "t9":
+            case "$t9":
                 t9 = val;
                 break;
-            case "k0":
+            case "$k0":
                 k0 = val;
                 break;
-            case "k1":
+            case "$k1":
                 k1 = val;
                 break;
-            case "gp":
+            case "$gp":
                 gp = val;
                 break;
-            case "sp":
+            case "$sp":
                 sp = val;
                 break;
-            case "fp":
+            case "$fp":
                 fp = val;
                 break;
-            case "ra":
+            case "$ra":
                 ra = val;
+                break;
+            default:
+                System.out.println("Invalid register name: " + reg);
                 break;
         }
     }
 
-    public static String syscall_handler(int v0_val){
-        return null;
+
+    public static String syscall_handler(int v0_val) { //TODO
+        String return_string = "";
+        switch (v0_val) {
+            case 1:  //print int
+                return_string = String.valueOf(a0);
+                break;
+            case 4: //print string
+                String hex_a0 = Integer.toHexString(a0);
+                return_string = DataSecConverter.data_mem.get(hex_a0); // handle key exception? ...
+                break;
+            case 5: //read int
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("Enter Int: ");
+                v0 = Integer.parseInt(scanner.nextLine()); // handle exception ...
+                break;
+            case 10: //stop execution
+                return_string = "-- program is finished running --";
+                break;
+            default:
+                throw new IllegalArgumentException("Only allowed to perform syscall on $v0 = 1,4,5,10");
+        }
+        return return_string;
     }
 
-    public static String run_program(String[] txtSec_translated){
-        return null;
+    public static String run_program() { //TODO
+        LinkedHashMap<String, Object[]> txtSec_translated = TextSecConverter.text_mem;
+        Operation op = null;
+        String return_string = ""; // only syscall returns
+        for (Object[] instr : txtSec_translated.values()) {
+            op = (Operation) instr[1];
+
+            if (instr.equals("syscall")) return_string = syscall_handler(v0);
+            else op.operate();
+        }
+        return return_string;
     }
 }
