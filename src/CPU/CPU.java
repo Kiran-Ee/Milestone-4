@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 // will keep track of ALL registers & maybe mem
 public class CPU {
-    public static int zero = -1;
-    public static int at = -1;
+    public static int zero = -1; // IF STRING APPROACH: Addr "0x10010000" imm "423"
+    public static int at = -1; // IF INT APPROACH: Addr [^ in dec] imm 423
     public static int a0 = -1;
     public static int a1 = -1;
     public static int a2 = -1;
