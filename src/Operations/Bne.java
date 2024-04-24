@@ -1,7 +1,7 @@
 package Operations;
 
 
-public class Bne implements Operation {
+public class Bne implements Operation { //
     private String rs = "";
     private String rt = "";
     private String offset = "";
